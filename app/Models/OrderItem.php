@@ -3,14 +3,18 @@
 namespace CodeDelivery\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
-class OrderIten extends Model
+class OrderItem extends Model implements Transformable
 {
+    use TransformableTrait;
+
    protected $fillable = [
-     'product_id',
+       'product_id',
        'order_id',
-      'price',
-      'qtd'
+       'price',
+       'qtd'
    ];
 
    public function order(){
@@ -20,4 +24,5 @@ class OrderIten extends Model
    public function product(){
       return $this->belongsTo(Product::class);
    }
+
 }

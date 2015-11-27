@@ -4,20 +4,15 @@ namespace CodeDelivery\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeDelivery\Repositories\CategoryRepository;
-use CodeDelivery\Models\Category;
+use CodeDelivery\Repositories\OrderItemRepository;
+use CodeDelivery\Models\OrderItem;
 
 /**
- * Class CategoryRepositoryEloquent
+ * Class OrderItemRepositoryEloquent
  * @package namespace CodeDelivery\Repositories;
  */
-class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
+class OrderItemRepositoryEloquent extends BaseRepository implements OrderItemRepository
 {
-
-    public function lists(){
-        return $this->model->lists('name','id');
-    }
-
     /**
      * Specify Model class name
      *
@@ -25,7 +20,7 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
      */
     public function model()
     {
-        return Category::class;
+        return OrderItem::class;
     }
 
     /**

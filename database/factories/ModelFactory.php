@@ -24,7 +24,7 @@ $factory->define(CodeDelivery\Models\User::class, function (Faker\Generator $fak
 $factory->define(CodeDelivery\Models\Category::class, function(Faker\Generator $faker){
  return [
      'name'=>$faker->word,
-     'active'=>true
+     //'active'=>true
  ];
 });
 
