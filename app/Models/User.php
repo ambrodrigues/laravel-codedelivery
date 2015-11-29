@@ -24,6 +24,9 @@ class User extends Model implements Transformable,
         return $this->hasOne(Client::class,'user_id','id');
     }
 
+
+
+
     /**
      * The database table used by the model.
      *

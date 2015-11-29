@@ -2,7 +2,6 @@
 
 namespace CodeDelivery\Http\Requests;
 
-use CodeDelivery\Http\Requests\Request;
 
 class AdminProductRequest extends Request
 {

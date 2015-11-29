@@ -3,7 +3,7 @@
 namespace CodeDelivery\Http\Requests;
 
 
-class AdminClientRequest extends Request
+class AdminOrderRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
