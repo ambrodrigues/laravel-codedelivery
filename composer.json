@@ -9,7 +9,10 @@
         "laravel/framework": "5.1.*",
         "prettus/l5-repository": "^2.1",
         "bestmomo/scafold": "dev-master",
-        "illuminate/html": "^5.0@dev"
+        "illuminate/html": "^5.0@dev",
+        "lucadegasperi/oauth2-server-laravel": "5.0.*",
+        "league/fractal": "^0.13.0",
+        "barryvdh/laravel-cors": "0.7.x"
     },
     "minimum-stability":"dev",
     "require-dev": {

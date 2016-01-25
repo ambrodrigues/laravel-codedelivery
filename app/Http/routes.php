@@ -15,13 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('welcome');
+});
 
-Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole', 'as'=>'admin.'],function(){
+
+Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin', 'as'=>'admin.'],function(){
 
 
     Route::get('orders',['as'=>'orders.index','uses'=>'OrdersController@index']);
     Route::get('orders/edit/{id}',['as'=>'orders.edit','uses'=>'OrdersController@edit']);
     Route::post('orders/update{id}',['as'=>'orders.update','uses'=>'OrdersController@update']);
+
+
+    Route::get('cupoms',['as'=>'cupoms.index','uses'=>'CupomsController@index']);
+    Route::get('cupoms/create',['as'=>'cupoms.create','uses'=>'CupomsController@edit']);
+    Route::post('cupoms/store',['as'=>'cupoms.store','uses'=>'CupomsController@update']);
 
     Route::get('clients',['as'=>'clients.index','uses'=>'ClientsController@index']);
     Route::get('clients/create',['as'=>'clients.create','uses'=>'ClientsController@create']);
@@ -33,6 +42,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole', 'as'=>'admin.']
     Route::get('categories/create',['as'=>'categories.create','uses'=>'CategoriesController@create']);
     Route::get('categories/edit/{id}',['as'=>'categories.edit','uses'=>'CategoriesController@edit']);
     Route::post('categories/update/{id}',['as'=>'categories.update','uses'=>'CategoriesController@update']);
+    Route::get('categories/destroy/{id}',['as'=>'categories.destroy','uses'=>'CategoriesController@destroy']);
     Route::post('categories/store',['as'=>'categories.store','uses'=>'CategoriesController@store']);
 
 
@@ -45,4 +55,45 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole', 'as'=>'admin.']
 });
 
 
+Route::group(['prefix'=>'customer','middleware'=>'auth.checkrole:client','as'=>'customer.'],function(){
+    Route::get('order',['as'=>'order.index','uses'=>'CheckoutController@index']);
+    Route::get('order/create',['as'=>'order.create','uses'=>'CheckoutController@create']);
+    Route::post('order/store',['as'=>'order.store','uses'=>'CheckoutController@store']);
+});
 
+
+
+Route::group(['middleware'=>'cors'],function(){
+
+    Route::post('oauth/access_token', function() {
+        return Response::json(Authorizer::issueAccessToken());
+    });
+
+    Route::group(['prefix'=>'api','middleware'=>'oauth','as'=>'api.'],function(){
+
+        Route::group(['prefix'=>'client','middleware'=>'oauth.checkrole:client','as'=>'client.'],function(){
+
+            Route::resource('order','Api\Client\ClientCheckoutController',
+                ['except'=>['create','edit','destroy']]
+            );
+
+            Route::get('products','Api\Client\ClientProductController@index');
+
+        });
+
+        Route::group(['prefix'=>'deliveryman','middleware'=>'oauth.checkrole:deliveryman','as'=>'deliveryman.'],function(){
+
+            Route::resource('order','Api\Deliveryman\DeliverymanCheckoutController',
+                ['except'=>['create','edit','destroy','store']]
+            );
+
+            Route::patch('order/update-status/{id}',[
+                'uses'=>'Api\Deliveryman\DeliverymanCheckoutController@updateStatus',
+                'as'=>'orders.update_status'
+            ]);
+        });
+
+        Route::get('cupom/{code}','Api\CupomController@show');
+
+    });
+});
