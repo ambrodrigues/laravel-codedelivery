@@ -18,7 +18,7 @@ angular.module('starter', [
 
 
 .constant('appConfig',{
-    baseUrl: 'http://localhost:8000'
+    baseUrl: 'http://192.168.1.5:8000'
 })
 
 .run(function($ionicPlatform) {
@@ -39,7 +39,7 @@ angular.module('starter', [
   });
 })
 
-.config(function($stateProvider,$urlRouterProvider,OAuthProvider,OAuthTokenProvider,appConfig){
+.config(function($stateProvider,$urlRouterProvider,OAuthProvider,OAuthTokenProvider,appConfig,$provide){
 
 
     OAuthProvider.configure({
@@ -86,6 +86,7 @@ angular.module('starter', [
             controller: 'ClientCheckoutDetailCtrl'
         })
         .state('client.checkout_successful',{
+            cache : false,
             url: '/checkout/successful',
             templateUrl : 'templates/client/checkout_successful.html',
             controller: 'ClientCheckoutSuccessfulCtrl'
@@ -96,7 +97,45 @@ angular.module('starter', [
             controller: 'ClientViewProductCtrl'
         });
 
-  //$urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/login');
 
+    /**
+     * provide
+     * para dar suporte em localStorage no OAuth2
+     *
+     * por padrao a biblioteca trabalha com cookies. e isso nao tem mais suporte
+     * no cordova, por isso precisa ser sobreescrito o objeto para dar suporte
+     * em localStorage
+     */
+
+    $provide.decorator('OAuthToken',['$localStorage','$delegate',function($localStorage,$delegate){
+        Object.defineProperties($delegate,{
+            setToken: {
+                value : function(data){
+                    $localStorage.setObject('token',data);
+                },
+                enumerable   : true,
+                configurable : true,
+                writable     : true
+            },
+            getToken: {
+                value : function(){
+                    return $localStorage.getObject('token');
+                },
+                enumerable   : true,
+                configurable : true,
+                writable     : true
+            },
+            removeToken: {
+                value : function(){
+                    $localStorage.setObject('token', null);
+                },
+                enumerable   : true,
+                configurable : true,
+                writable     : true
+            }
+        });
+        return $delegate;
+    }]);
 
 })

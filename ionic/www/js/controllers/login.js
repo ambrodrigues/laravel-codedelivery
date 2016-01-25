@@ -8,8 +8,11 @@ angular.module('starter.controllers')
 
     $scope.login = function(){
         OAuth.getAccessToken($scope.user).then(function(data){
-           $state.go('home');
+
+           $state.go('client.checkout');
+
         },function(responseError){
+            alert(responseError.statusText);
             $ionicPopup.alert({
                 title : 'Alerta',
                 template: 'Login e/ou senha inválidos'
