@@ -13,7 +13,8 @@ angular.module('starter', [
     'starter.controllers',
     'starter.services',
     'angular-oauth2',
-    'ngResource'
+    'ngResource',
+    'ngCordova'
 ])
 
 
