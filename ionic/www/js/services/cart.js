@@ -5,7 +5,6 @@ angular.module('starter.services')
 
         var cartAux = $localStorage.getObject(key);
 
-        console.log(cartAux);
 
         if (!cartAux){
             initCart();

@@ -1,5 +1,5 @@
 angular.module('starter.services')
-    .factory('Order',['$resource','appConfig',function($resource,appConfig){
+    .factory('ClientOrder',['$resource','appConfig',function($resource,appConfig){
 
         return $resource(appConfig.baseUrl +'/api/client/order/:id',{id : '@id'},{
             query :{
@@ -7,4 +7,15 @@ angular.module('starter.services')
             }
         });
 
-    }]);
+    }])
+
+
+.factory('DeliverymanOrder',['$resource','appConfig',function($resource,appConfig){
+
+    return $resource(appConfig.baseUrl +'/api/deliveryman/order/:id',{id : '@id'},{
+        query :{
+            isArray:false
+        }
+    });
+
+}]);

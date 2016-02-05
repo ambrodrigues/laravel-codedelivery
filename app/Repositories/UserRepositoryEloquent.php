@@ -4,7 +4,7 @@ namespace CodeDelivery\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeDelivery\Repositories\UserRepository;
+use CodeDelivery\Presenters\UserPresenter;
 use CodeDelivery\Models\User;
 
 /**
@@ -14,6 +14,7 @@ use CodeDelivery\Models\User;
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
 
+    protected $skipPresenter = true;
 
     public function getDeliverymen(){
         return $this->model->where(['role'=>'deliveryman'])->lists('name','id');
@@ -36,5 +37,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return UserPresenter::class;
     }
 }

@@ -5,6 +5,7 @@ namespace CodeDelivery\Http\Controllers\Api\Deliveryman;
 
 use CodeDelivery\Http\Controllers\Controller;
 use CodeDelivery\Http\Requests\AdminCategoryRequest;
+use CodeDelivery\Models\Geo;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\UserRepository;
 use CodeDelivery\Services\OrderService;
@@ -93,12 +94,15 @@ class DeliverymanCheckoutController extends Controller
 
     }
 
-    public function update(AdminCategoryRequest $request,$id){
-        $data = $request->all();
+  public function geo(Request $request,Geo $geo, $id){
+      $idDeliveryman = Authorizer::getResourceOwnerId();
 
-        $this->service->update($data,$id);
+      $order = $this->orderRepository->getByIdAndDeliveryman($id,$idDeliveryman);
 
-        return redirect()->route('admin.categories.index');
-    }
+      $geo->lat = $request->get('lat');
+      $geo->long = $request->get('long');
+
+      return $geo;
+  }
 
 }

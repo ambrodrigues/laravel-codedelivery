@@ -6,12 +6,14 @@
 
 angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
+angular.module('starter.filters',[]);
 
 
 angular.module('starter', [
     'ionic',
     'starter.controllers',
     'starter.services',
+    'starter.filters',
     'angular-oauth2',
     'ngResource',
     'ngCordova'
@@ -19,7 +21,7 @@ angular.module('starter', [
 
 
 .constant('appConfig',{
-    baseUrl: 'http://192.168.1.5:8000'
+    baseUrl: 'http://192.168.1.6:8000'
 })
 
 .run(function($ionicPlatform) {
@@ -72,8 +74,20 @@ angular.module('starter', [
          })
         .state('client',{
             abstract: true,
+            cache : false,
             url : '/client',
-            template: '<ion-nav-view/>'
+            templateUrl: 'templates/client/menu.html',
+            controller : 'ClientMenuCtrl'
+        })
+        .state('client.order',{
+            url: '/order',
+            templateUrl : 'templates/client/order.html',
+            controller: 'ClientOrderCtrl'
+        })
+        .state('client.view_order',{
+            url: '/view_order/:id',
+            templateUrl : 'templates/client/view_order.html',
+            controller: 'ClientViewOrderCtrl'
         })
         .state('client.checkout',{
             cache : false,
@@ -96,6 +110,24 @@ angular.module('starter', [
             url: '/view_products',
             templateUrl : 'templates/client/view_products.html',
             controller: 'ClientViewProductCtrl'
+        })
+        .state('deliveryman',{
+            abstract: true,
+            cache : false,
+            url : '/deliveryman',
+            templateUrl: 'templates/deliveryman/menu.html',
+            controller : 'DeliverymanMenuCtrl'
+        })
+        .state('deliveryman.order',{
+            url: '/order',
+            templateUrl : 'templates/deliveryman/order.html',
+            controller: 'DeliverymanOrderCtrl'
+        })
+        .state('deliveryman.view_order',{
+            cache : false,
+            url: '/view_order/:id',
+            templateUrl : 'templates/deliveryman/view_order.html',
+            controller: 'DeliverymanViewOrderCtrl'
         });
 
   $urlRouterProvider.otherwise('/login');

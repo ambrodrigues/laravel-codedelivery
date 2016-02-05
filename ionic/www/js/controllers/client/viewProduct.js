@@ -1,7 +1,12 @@
 angular.module('starter.controllers')
 
 .controller('ClientViewProductCtrl',[
-    '$scope','$state','Product','$ionicLoading','$localStorage','$cart',function($scope,$state,Product,$ionicLoading,$localStorage,$cart){
+    '$scope',
+    '$state',
+    'Product',
+    '$ionicLoading',
+    '$localStorage',
+    '$cart',function($scope,$state,Product,$ionicLoading,$localStorage,$cart){
 
 
     $scope.products = [];
