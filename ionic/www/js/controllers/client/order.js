@@ -5,7 +5,8 @@ angular.module('starter.controllers')
     '$state',
     '$ionicLoading',
     'ClientOrder',
-    function($scope,$state,$ionicLoading,ClientOrder) {
+    '$ionicActionSheet',
+    function($scope,$state,$ionicLoading,ClientOrder,$ionicActionSheet) {
 
         $scope.items = [];
 
@@ -27,6 +28,33 @@ angular.module('starter.controllers')
 
             $state.go('client.view_order',{id : order.id});
         }
+
+
+        $scope.showActionSheet = function(order){
+            $ionicActionSheet.show({
+                buttons : [
+                    {text : 'Ver Detalhes'},
+                    {text : 'Ver Entrega'}
+                ],
+                tittleText : 'O que fazer?',
+                cancelText : 'Cancelar',
+                cancel : function(){
+
+                },
+                buttonClicked : function(index){
+                    switch (index){
+                        case 0 :
+                            $state.go('client.view_order',{id : order.id});
+                            break;
+                        case 1 :
+                            $state.go('client.view_delivery',{id : order.id});
+                            break;
+                    }
+                }
+
+            });
+        };
+
 
         /**
          * a ordenacao eh um recurso do l5-repository

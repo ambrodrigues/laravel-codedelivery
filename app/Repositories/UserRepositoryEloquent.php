@@ -21,6 +21,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     }
 
 
+
+
     /**
      * Specify Model class name
      *
@@ -42,5 +44,16 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function presenter()
     {
         return UserPresenter::class;
+    }
+
+    public function updateDeviceToken($id, $deviceToken)
+    {
+        $model = $this->model->find($id);
+
+        $model->device_token = $deviceToken;
+
+        $model->save();
+
+        return $this->parserResult($model);
     }
 }

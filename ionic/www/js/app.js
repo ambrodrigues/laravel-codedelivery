@@ -8,24 +8,38 @@ angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter.filters',[]);
 
+//ionic add ionic-platform-web-client   para ativar push
+
+//ionic plugin add phonegap-plugin-push
+
+//ionic io init
+
+//ionic config set dev_push true
 
 angular.module('starter', [
     'ionic',
+    'ionic.service.core',
     'starter.controllers',
     'starter.services',
     'starter.filters',
     'angular-oauth2',
     'ngResource',
-    'ngCordova'
+    'ngCordova',
+    'uiGmapgoogle-maps',
+    'pusher-angular'
 ])
 
 
 .constant('appConfig',{
-    baseUrl: 'http://192.168.1.6:8000'
+    baseUrl: 'http://localhost:8000',
+    pusherKey :'65f29e97a37f0afd980a'
 })
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$window,appConfig,$localStorage) {
+    $window.client = new Pusher(appConfig.pusherKey);
+
   $ionicPlatform.ready(function() {
+
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -39,6 +53,22 @@ angular.module('starter', [
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+      Ionic.io();
+
+      var push  = new Ionic.Push({
+          debug : true,
+
+          onNotification: function(message){
+              console.log(message);
+          }
+      });
+
+      push.register(function(token){
+          console.log(token.token);
+        $localStorage.set('device_token',token.token);
+      });
+
   });
 })
 
@@ -88,6 +118,12 @@ angular.module('starter', [
             url: '/view_order/:id',
             templateUrl : 'templates/client/view_order.html',
             controller: 'ClientViewOrderCtrl'
+        })
+        .state('client.view_delivery',{
+            cache : false,
+            url: '/view_delivery/:id',
+            templateUrl : 'templates/client/view_delivery.html',
+            controller: 'ClientViewDeliveryCtrl'
         })
         .state('client.checkout',{
             cache : false,

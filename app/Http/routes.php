@@ -87,7 +87,7 @@ Route::group(['middleware'=>'cors'],function(){
                 ['except'=>['create','edit','destroy','store']]
             );
 
-            Route::patch('order/update-status/{id}',[
+            Route::patch('order/{id}/update-status',[
                 'uses'=>'Api\Deliveryman\DeliverymanCheckoutController@updateStatus',
                 'as'=>'orders.update_status'
             ]);
@@ -99,6 +99,7 @@ Route::group(['middleware'=>'cors'],function(){
         });
 
         Route::get('authenticated','Api\UserController@authenticated');
+        Route::patch('device_token','Api\UserController@updateDeviceToken');
         Route::get('cupom/{code}','Api\CupomController@show');
 
     });
