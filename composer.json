@@ -14,7 +14,8 @@
         "league/fractal": "^0.13.0",
         "barryvdh/laravel-cors": "0.7.x",
         "pusher/pusher-php-server": "~2.0",
-        "dmitrovskiy/ionic-push-php": "^0.0.2"
+        "dmitrovskiy/ionic-push-php": "^0.0.2",
+        "heroku/heroku-buildpack-php": "dev-master"
     },
     "minimum-stability":"dev",
     "require-dev": {

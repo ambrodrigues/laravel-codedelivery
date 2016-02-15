@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ea41df1c2595a3540e3ac3d77d31a963",
-    "content-hash": "1514f0ff4379ef563b52464f1fc230b2",
+    "hash": "fe6a36761cc55e05ae1e9c39a9afdd62",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -529,6 +528,50 @@
             "time": "2016-01-23 01:23:02"
         },
         {
+            "name": "heroku/heroku-buildpack-php",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/heroku/heroku-buildpack-php.git",
+                "reference": "5d0f849ad6f76d7d62fb82036ebf6c4793b1707e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/5d0f849ad6f76d7d62fb82036ebf6c4793b1707e",
+                "reference": "5d0f849ad6f76d7d62fb82036ebf6c4793b1707e",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/heroku-hhvm-apache2",
+                "bin/heroku-hhvm-nginx",
+                "bin/heroku-php-apache2",
+                "bin/heroku-php-nginx"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Zuelke",
+                    "email": "dz@heroku.com"
+                }
+            ],
+            "description": "Toolkit for starting a PHP application locally, with or without foreman, using the same config for PHP/HHVM and Apache2/Nginx as on Heroku",
+            "homepage": "http://github.com/heroku/heroku-buildpack-php",
+            "keywords": [
+                "apache",
+                "apache2",
+                "foreman",
+                "heroku",
+                "hhvm",
+                "nginx",
+                "php"
+            ],
+            "time": "2016-02-08 23:53:13"
+        },
+        {
             "name": "illuminate/html",
             "version": "dev-master",
             "source": {
@@ -907,7 +950,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/35b0af4532c72da9ad533c810251d2af7c32a410",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/39fbfeec0eb00cd9fa2e6b93d13e2c6e6a42dfcb",
                 "reference": "35b0af4532c72da9ad533c810251d2af7c32a410",
                 "shasum": ""
             },
@@ -3072,7 +3115,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/e55e3e32a870bd4f05425fa4f717b52bd40e5659",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/ce91d434b3dc443a3294c4535747765e84d11094",
                 "reference": "e55e3e32a870bd4f05425fa4f717b52bd40e5659",
                 "shasum": ""
             },
@@ -3918,7 +3961,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "bestmomo/scafold": 20,
-        "illuminate/html": 20
+        "illuminate/html": 20,
+        "heroku/heroku-buildpack-php": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
