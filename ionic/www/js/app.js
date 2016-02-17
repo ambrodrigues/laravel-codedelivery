@@ -31,7 +31,7 @@ angular.module('starter', [
 
 
 .constant('appConfig',{
-    baseUrl: 'http://localhost:8000',
+    baseUrl: 'https://evening-headland-28376.herokuapp.com/',
     pusherKey :'65f29e97a37f0afd980a'
 })
 
@@ -60,7 +60,7 @@ angular.module('starter', [
           debug : true,
 
           onNotification: function(message){
-              console.log(message);
+              alert(message.text);
           }
       });
 

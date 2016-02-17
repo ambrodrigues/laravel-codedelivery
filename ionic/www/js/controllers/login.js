@@ -8,7 +8,8 @@ angular.module('starter.controllers')
     'UserData',
     'User',
     '$localStorage',
-    function($scope,OAuth,OAuthToken,$ionicPopup,$state,UserData,User,$localStorage){
+    '$ionicLoading',
+    function($scope,OAuth,OAuthToken,$ionicPopup,$state,UserData,User,$localStorage,$ionicLoading){
 
     $scope.user = {
         username : '',
@@ -17,6 +18,11 @@ angular.module('starter.controllers')
 
 
     $scope.login = function(){
+
+        $ionicLoading.show({
+            template: 'Aguarde...'
+        });
+
         var promisse = OAuth.getAccessToken($scope.user);
 
             promisse
@@ -31,11 +37,21 @@ angular.module('starter.controllers')
              })
              .then(function(data){
 
+                 console.log(data);
+
                     UserData.set(data.data);
 
-                    $state.go('client.checkout');
+                    $ionicLoading.hide();
+
+                    if (data.data.role === 'client') {
+                        $state.go('client.checkout');
+                    } else {
+                        $state.go('deliveryman.order');
+                    }
 
             },function(responseError){
+
+                 $ionicLoading.hide();
 
                 UserData.set(null);
 
