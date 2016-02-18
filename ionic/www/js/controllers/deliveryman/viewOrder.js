@@ -51,13 +51,28 @@ angular.module('starter.controllers')
                     lat : position.coords.latitude,
                     long: position.coords.longitude
                 });
+                    alert('mandou localizacao');
             });
         });
     };
 
      $scope.goMarkEntregue = function(){
-            DeliverymanOrder.updateStatus({id : $stateParams.id}, {status : 2},function(){
-            });
+
+         var confirmPopup = $ionicPopup.confirm({
+             title: 'Entrega de pedido',
+             template: 'Deseja marcar pedido como entregue?'
+         });
+
+         confirmPopup.then(function(res) {
+             if(res) {
+                 DeliverymanOrder.updateStatus({id : $stateParams.id}, {status : 2},function(){
+                     $ionicPopup.alert({
+                         title : 'Alerta',
+                         template: 'Pedido marcado como entregue.'
+                     });
+                 });
+             }
+         });
     };
 
         function stopWatchPosition(){

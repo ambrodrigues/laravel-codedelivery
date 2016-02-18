@@ -29,6 +29,7 @@ class OrderTransformer extends TransformerAbstract
             'total'=>(float)$model->total,
             'product_names'=>$this->getArrayProductNames($model->items),
             'status'=>$model->status,
+            'statusTxt'=>$this->getStatusTxt($model->status),
             'hash'=>$model->hash,
 
             /* place your other model properties here */
@@ -36,6 +37,24 @@ class OrderTransformer extends TransformerAbstract
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];
+    }
+
+
+    protected function getStatusTxt($status){
+        $txt = '';
+        switch ($status){
+            case 0:
+              $txt = 'Pedido realizado';
+                break;
+            case 1:
+              $txt = 'Pedido em entrega';
+                break;
+            case 2:
+              $txt = 'Pedido entregue';
+            break;
+        }
+
+        return $txt;
     }
 
     protected function getArrayProductNames(Collection $items){

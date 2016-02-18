@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col">
                         <h2>{{o.created_at.date | limitTo:10 | date:'dd/MM/yyyy'}}</h2>
-                        <h3>Status: {{o.status}}</h3>
+                        <h3>Status: {{o.statusTxt}}</h3>
                         <p>
                             {{o.product_names | limitTo: 2 | join :', '}}
                         </p>
