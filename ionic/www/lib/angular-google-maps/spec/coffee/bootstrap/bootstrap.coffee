@@ -1,3 +1,4 @@
+###globals angular,_,inject###
 #global jasmine protects
 beforeEach ->
   @googleTemp = window.google
@@ -42,7 +43,7 @@ beforeEach ->
 
     fn() if fn? and _.isFunction fn
     while @timeout.hasPendingTasks()
-        @timeout.flush()
+      @timeout.flush()
     @rootScope.$digest()
 
 afterEach ->

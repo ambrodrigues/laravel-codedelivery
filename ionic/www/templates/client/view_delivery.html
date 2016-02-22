@@ -26,12 +26,16 @@
         </ion-list>
 
         <ui-gmap-google-map center="map.center" zoom="map.zoom" bounds="map.bounds">
-           <!--<ui-gmap-marker idkey="o.id" coords="o.coords" options="o.options" ng-repeat = "o in markers">-->
-
+           <!--<ui-gmap-marker-->
+                   <!--idkey="o.id"-->
+                   <!--coords="o.coords"-->
+                   <!--options="o.options"-->
+                   <!--ng-repeat = "o in markers">-->
            <!--</ui-gmap-marker>-->
-            <ui-gmap-markers model="markers" coords="'coords'" options="'options'" fit="map.fit">
+              <ui-gmap-markers models="markers" coords="'coords'" options="'options'" fit="map.fit">
 
-           </ui-gmap-markers>
+            </ui-gmap-markers>
+
 
             <ui-gmap-map-control
                     template="button-descentralize.html"

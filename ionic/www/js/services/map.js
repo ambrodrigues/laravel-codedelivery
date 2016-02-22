@@ -5,6 +5,7 @@ angular.module('starter.services')
                 latitude : 0,
                 longitude : 0
             },
+            pan: true,
             zoom : 12
         };
     });

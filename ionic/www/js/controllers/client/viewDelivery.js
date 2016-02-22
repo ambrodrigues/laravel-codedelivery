@@ -22,10 +22,13 @@ angular.module('starter.controllers')
              $map,
              uiGmapGoogleMapApi){
 
-    $scope.order = [];
-        $scope.map = $map;
+    var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2/';
 
-    $scope.markers = [];
+    $scope.order = [];
+
+     $scope.markers = [];
+
+     $scope.map = $map;
 
     $ionicLoading.show({
         template: 'Carregando...'
@@ -40,7 +43,7 @@ angular.module('starter.controllers')
     ClientOrder.get({id : $stateParams.id, include : 'items,cupom'},function(data){
         $scope.order = data.data;
 
-        if ($scope.order.status == 1){
+        if (parseInt($scope.order.status,10) == 1){
             initMarkers($scope.order);
         } else {
             $ionicPopup.alert({
@@ -48,7 +51,6 @@ angular.module('starter.controllers')
                 template: 'Pedido nao esta em status de entrega.'
             });
         }
-
     });
 
 
@@ -65,6 +67,9 @@ angular.module('starter.controllers')
             client.address + ', ' +
             client.city + ' - '+
             client.state;
+
+        address='89600000, Sebastião Poletto,18, Joaçaba - Santa Catarina';
+
         createMarkerClient(address);
         watchPositionDeliveryman(order.hash);
     }
@@ -87,7 +92,7 @@ angular.module('starter.controllers')
                         },
                         options:{
                             title : 'Local de entrega',
-                            icon : 'http://maps.google.com/mapfiles/kml/pal2/icon2.png'
+                            icon : iconUrl+'icon2.png'
                         }
                     });
 
@@ -110,7 +115,7 @@ angular.module('starter.controllers')
 
             var lat = data.geo.lat, long = data.geo.long;
 
-            if ($scope.markers.length == 1 || $scope.markers.length == 0){
+            if ($scope.markers.length <= 1){
                 $scope.markers.push({
                     id : 'entregador',
                     coords : {
@@ -119,13 +124,14 @@ angular.module('starter.controllers')
                     },
                     options:{
                         title : 'Entregador',
-                        icon : 'http://maps.google.com/mapfiles/kml/pal2/icon47.png'
+                        icon : iconUrl+'icon47.png'
                     }
                 });
 
                 return;
             }
 
+            //procura pelo marker do entregador para mudar a posicao dele
             for(var key in $scope.markers){
                 if ($scope.markers[key].id == 'entregador'){
                     $scope.markers[key].coords = {

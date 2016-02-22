@@ -72,7 +72,9 @@ angular.module('starter', [
   });
 })
 
-.config(function($stateProvider,$urlRouterProvider,OAuthProvider,OAuthTokenProvider,appConfig,$provide){
+    .config(function($stateProvider,$urlRouterProvider,OAuthProvider,OAuthTokenProvider,appConfig,$provide){
+
+
 
 
     OAuthProvider.configure({

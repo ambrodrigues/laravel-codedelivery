@@ -51,7 +51,7 @@ angular.module('starter.controllers')
                     lat : position.coords.latitude,
                     long: position.coords.longitude
                 });
-                    alert('mandou localizacao');
+
             });
         });
     };
