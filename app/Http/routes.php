@@ -25,7 +25,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin', 'as'=>'ad
 
     Route::get('orders',['as'=>'orders.index','uses'=>'OrdersController@index']);
     Route::get('orders/edit/{id}',['as'=>'orders.edit','uses'=>'OrdersController@edit']);
-    Route::post('orders/update{id}',['as'=>'orders.update','uses'=>'OrdersController@update']);
+    Route::post('orders/update/{id}',['as'=>'orders.update','uses'=>'OrdersController@update']);
 
 
     Route::get('cupoms',['as'=>'cupoms.index','uses'=>'CupomsController@index']);

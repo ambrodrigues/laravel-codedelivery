@@ -96,7 +96,7 @@ class ClientCheckoutController extends Controller
     public function update(AdminCategoryRequest $request,$id){
         $data = $request->all();
 
-        $this->service->update($data,$id);
+        $this->orderService->update($data,$id);
 
         return redirect()->route('admin.categories.index');
     }

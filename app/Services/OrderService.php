@@ -118,6 +118,21 @@ class OrderService
     }
 
 
+    public function update($data,$id){
+      $this->orderRepository->update($data,$id);
+
+      if ($data['status']== 0 && $data['user_deliveryman_id'] !=''){
+
+          $order = $this->orderRepository->find($id);
+          $user = $order->client->user;
+
+          $this->pushProcessor->notify([$user->device_token],[
+              'alert'=>"Seu Pedido {$order->id} foi despachado para o entregador."
+          ]);
+      }
+    }
+
+
     public function updateStatus($id,$idDeliveryman,$status){
         $order = $this->orderRepository->getByIdAndDeliveryman($id,$idDeliveryman);
 
@@ -128,7 +143,13 @@ class OrderService
                 if (!$order->hash){
                     $order->hash = md5((new \DateTime())->getTimestamp());
                 }
+                $user = $order->client->user;
                 $order->save();
+
+                $this->pushProcessor->notify([$user->device_token],[
+                    'alert'=>"Seu Pedido {$order->id} saiu para entrega."
+                ]);
+
                 break;
             case 2 :
                 $user = $order->client->user;

@@ -13,6 +13,7 @@ use CodeDelivery\Http\Requests\AdminOrderRequest;
 use CodeDelivery\Http\Requests\Request;
 use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\UserRepository;
+use CodeDelivery\Services\OrderService;
 
 class OrdersController extends Controller
 {
@@ -22,10 +23,15 @@ class OrdersController extends Controller
      * @var OrderRepository
      */
     private $orderRepository;
+    /**
+     * @var OrderService
+     */
+    private $orderService;
 
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrderRepository $orderRepository,OrderService $orderService)
     {
         $this->orderRepository = $orderRepository;
+        $this->orderService = $orderService;
     }
 
 
@@ -56,7 +62,7 @@ class OrdersController extends Controller
     public function update(AdminOrderRequest $request,$id){
         $data = $request->all();
 
-        $this->orderRepository->update($data,$id);
+        $this->orderService->update($data,$id);
 
         return redirect()->route('admin.orders.index');
     }
