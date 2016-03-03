@@ -9,7 +9,8 @@ angular.module('starter.controllers')
     'User',
     '$localStorage',
     '$ionicLoading',
-    function($scope,OAuth,OAuthToken,$ionicPopup,$state,UserData,User,$localStorage,$ionicLoading){
+    '$cordovaNetwork',
+    function($scope,OAuth,OAuthToken,$ionicPopup,$state,UserData,User,$localStorage,$ionicLoading,$cordovaNetwork){
 
     $scope.user = {
         username : '',
@@ -22,6 +23,15 @@ angular.module('starter.controllers')
         $ionicLoading.show({
             template: 'Aguarde...'
         });
+
+        //var isOffline = $cordovaNetwork.isOffline();
+        //
+        //if (isOffline == true){
+        //    $ionicPopup.alert({
+        //        title : 'Alerta',
+        //        template: 'Verifique sua conexão de internet. Você parece estar off-line.'
+        //    });
+        //}
 
         var promisse = OAuth.getAccessToken($scope.user);
 
@@ -56,6 +66,7 @@ angular.module('starter.controllers')
                 UserData.set(null);
 
                 OAuthToken.removeToken();
+
 
                 $ionicPopup.alert({
                     title : 'Alerta',

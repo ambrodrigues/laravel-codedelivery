@@ -14,7 +14,7 @@ class OrderTransformer extends TransformerAbstract
 {
 
     //protected $defaultIncludes = [];
-    protected $availableIncludes = ['cupom','items'];
+    protected $availableIncludes = ['cupom','items','client'];
 
     /**
      * Transform the \Order entity

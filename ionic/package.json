@@ -28,7 +28,8 @@
       "id": "phonegap-plugin-barcodescanner"
     },
     "cordova-plugin-geolocation",
-    "phonegap-plugin-push"
+    "phonegap-plugin-push",
+    "cordova-plugin-network-information"
   ],
   "cordovaPlatforms": [
     "ios"

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
+use \CodeDelivery\Presenters\OrderPresenter;
 
 use CodeDelivery\Models\Order;
 
@@ -24,6 +25,21 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
                        ->where('id',$id)
                        ->where('user_deliveryman_id',$idDeliveryman)
                        ->first();
+
+        if ($result){
+            return $this->parserResult($result);
+        }
+
+        throw (new ModelNotFoundException())->setModel(get_class($this->model));
+    }
+
+
+    public function getByIdAndClient($id, $idClient)
+    {
+        $result = $this->model
+            ->where('id',$id)
+            ->where('client_id',$idClient)
+            ->first();
 
         if ($result){
             return $this->parserResult($result);
@@ -58,6 +74,7 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
 
 public function presenter()
 {
-    return \CodeDelivery\Presenters\OrderPresenter::class;
+    return OrderPresenter::class;
 }
+
 }
