@@ -94,8 +94,13 @@ angular.module('starter', [
     $stateProvider
         .state('login',{
            url :'/login',
+            cache : false,
            templateUrl:'templates/login.html',
            controller: 'loginCtrl'
+         })
+        .state('logout',{
+           url :'/logout',
+           controller: 'logoutCtrl'
          })
         .state('home',{
            url :'/home',
