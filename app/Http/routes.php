@@ -71,6 +71,14 @@ Route::group(['middleware'=>'cors'],function(){
 
     Route::group(['prefix'=>'api','middleware'=>'oauth','as'=>'api.'],function(){
 
+
+        //avaliacao
+        Route::get('teste',function(){
+            return 'metodo teste para avaliacao';
+        });
+
+
+
         Route::group(['prefix'=>'client','middleware'=>'oauth.checkrole:client','as'=>'client.'],function(){
 
             Route::resource('order','Api\Client\ClientCheckoutController',
