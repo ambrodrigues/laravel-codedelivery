@@ -10,7 +10,8 @@ angular.module('starter.controllers')
     '$localStorage',
     '$ionicLoading',
     '$cordovaNetwork',
-    function($scope,OAuth,OAuthToken,$ionicPopup,$state,UserData,User,$localStorage,$ionicLoading,$cordovaNetwork){
+    '$redirect',
+    function($scope,OAuth,OAuthToken,$ionicPopup,$state,UserData,User,$localStorage,$ionicLoading,$cordovaNetwork,$redirect){
 
     $scope.user = {
         username : '',
@@ -51,13 +52,17 @@ angular.module('starter.controllers')
 
                     UserData.set(data.data);
 
-                    $ionicLoading.hide();
+                    $redirect.redirectAfterLogin();
 
-                    if (data.data.role === 'client') {
-                        $state.go('client.checkout');
-                    } else {
-                        $state.go('deliveryman.order');
-                    }
+                    //$ionicLoading.hide();
+
+
+
+                    //if (data.data.role === 'client') {
+                    //    $state.go('client.checkout');
+                    //} else {
+                    //    $state.go('deliveryman.order');
+                    //}
 
             },function(responseError){
 

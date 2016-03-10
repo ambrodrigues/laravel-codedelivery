@@ -26,13 +26,18 @@ angular.module('starter', [
     'ngResource',
     'ngCordova',
     'uiGmapgoogle-maps',
-    'pusher-angular'
+    'pusher-angular',
+    'permission'
 ])
 
 
 .constant('appConfig',{
     baseUrl: 'https://evening-headland-28376.herokuapp.com/',
-    pusherKey :'65f29e97a37f0afd980a'
+    pusherKey :'65f29e97a37f0afd980a',
+    redirectAfterLogin : {
+        client : 'client.order',
+        deliveryman : 'deliveryman.order'
+    }
 })
 
 .run(function($ionicPlatform,$window,appConfig,$localStorage) {
