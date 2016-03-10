@@ -52,9 +52,11 @@ angular.module('starter.controllers')
 
                     UserData.set(data.data);
 
+                    $ionicLoading.hide();
+
                     $redirect.redirectAfterLogin();
 
-                    //$ionicLoading.hide();
+                    //
 
 
 

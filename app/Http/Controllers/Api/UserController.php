@@ -23,8 +23,8 @@ class UserController extends Controller
     public function authenticated(){
 
         $id = Authorizer::getResourceOwnerId();
-        //alterado para skipPresenter = true apenas para a avaliacao
-        return $this->userRepository->skipPresenter(true)->find($id);
+
+        return $this->userRepository->skipPresenter(false)->find($id);
     }
 
     public function updateDeviceToken(Request $request){

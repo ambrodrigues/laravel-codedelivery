@@ -7,6 +7,7 @@
 angular.module('starter.controllers',[]);
 angular.module('starter.services',[]);
 angular.module('starter.filters',[]);
+angular.module('starter.run',[]);
 
 //ionic add ionic-platform-web-client   para ativar push
 
@@ -22,6 +23,7 @@ angular.module('starter', [
     'starter.controllers',
     'starter.services',
     'starter.filters',
+    'starter.run',
     'angular-oauth2',
     'ngResource',
     'ngCordova',
@@ -119,7 +121,12 @@ angular.module('starter', [
             cache : false,
             url : '/client',
             templateUrl: 'templates/client/menu.html',
-            controller : 'ClientMenuCtrl'
+            controller : 'ClientMenuCtrl',
+            data :{
+                permissions : {
+                    only : ['user-permission']
+                }
+            }
         })
         .state('client.order',{
             url: '/order',
