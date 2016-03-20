@@ -14,7 +14,7 @@ class OrderTransformer extends TransformerAbstract
 {
 
     //protected $defaultIncludes = [];
-    protected $availableIncludes = ['cupom','items','client'];
+    protected $availableIncludes = ['cupom','items','client','deliveryman'];
 
     /**
      * Transform the \Order entity
@@ -69,6 +69,13 @@ class OrderTransformer extends TransformerAbstract
 
     public function includeClient(Order $model){
         return $this->item($model->client,new ClientTransformer());
+    }
+
+    public function includeDeliveryman(Order $model){
+        if (!$model->deliveryman){
+            return null;
+        }
+        return $this->item($model->deliveryman,new DeliverymanTransformer());
     }
 
     public function includeCupom(Order $model){

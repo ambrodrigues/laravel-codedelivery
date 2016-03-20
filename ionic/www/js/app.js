@@ -29,7 +29,8 @@ angular.module('starter', [
     'ngCordova',
     'uiGmapgoogle-maps',
     'pusher-angular',
-    'permission'
+    'permission',
+    'http-auth-interceptor'
 ])
 
 
@@ -124,7 +125,7 @@ angular.module('starter', [
             controller : 'ClientMenuCtrl',
             data :{
                 permissions : {
-                    only : ['user-permission']
+                    only : ['client-role']
                 }
             }
         })
@@ -171,7 +172,12 @@ angular.module('starter', [
             cache : false,
             url : '/deliveryman',
             templateUrl: 'templates/deliveryman/menu.html',
-            controller : 'DeliverymanMenuCtrl'
+            controller : 'DeliverymanMenuCtrl',
+            data :{
+                permissions : {
+                    only : ['deliveryman-role']
+                }
+            }
         })
         .state('deliveryman.order',{
             url: '/order',
@@ -223,6 +229,12 @@ angular.module('starter', [
                 writable     : true
             }
         });
+        return $delegate;
+    }]);
+    $provide.decorator('oauthInterceptor',['$delegate',function($delegate){
+
+        delete $delegate['responseError'];
+
         return $delegate;
     }]);
 
